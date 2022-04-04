@@ -18,6 +18,7 @@
       },
       pullUpLoad:{
         type: Boolean,
+        //返回值为对象或数组时，default必须是函数
         default: false
       }
     },
@@ -36,11 +37,13 @@
       this.scroll.on('scroll', position => {
         this.$emit('scroll', position)
       })
-      //监听上拉加载更多
-      this.scroll.on('pullingUp', () => {
-        // console.log('上拉加载更多')
-        this.$emit('pullingUp')
-      });
+      //监听滚动到底部
+      if (this.pullUpLoad){
+        this.scroll.on('pullingUp',()=>{
+          // console.log('到底啦')
+          this.$emit('pullingUp')
+        })
+      }
     },
     methods: {
       scrollTo(x, y, time = 300) {
@@ -48,6 +51,10 @@
       },
       finishPullUp() {
         this.scroll.finishPullUp()
+      },
+      refresh(){
+        // console.log('---')
+        this.scroll && this.scroll.refresh()
       }
     }
   }

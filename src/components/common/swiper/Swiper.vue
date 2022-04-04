@@ -15,7 +15,7 @@
 
 <script>
 	export default {
-		name: "Swiper",
+		name:  "Swiper",
     props: {
       interval: {
 		    type: Number,

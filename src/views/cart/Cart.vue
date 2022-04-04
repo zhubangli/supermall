@@ -1,15 +1,40 @@
 <template>
-  <div>
-    <h2>购物车</h2>
+  <div class="cart">
+    <nav-bar class="nav-bar">
+      <div slot="center" class="">购物车({{cartLength}})</div>
+    </nav-bar>
+    <cart-list/>
+    <cart-bottom-bar/>
   </div>
 </template>
 
 <script>
+  import NavBar from "@/components/common/navbar/NavBar";
+  import CartList from "@/views/cart/childComps/CartList";
+  import CartBottomBar from "@/views/cart/childComps/CartBottomBar";
+
   export default {
-    name: "Cart"
+    name: "Cart",
+    components: {
+      NavBar,
+      CartList,
+      CartBottomBar
+    },
+    computed: {
+      cartLength() {
+        return this.$store.state.cartList.length
+      }
+    }
   }
 </script>
 
 <style scoped>
+  .nav-bar {
+    background-color: var(--color-tint);
+    color: white;
+  }
 
+  .cart {
+    height: 100vh;
+  }
 </style>
